@@ -66,4 +66,4 @@ USER minetest:minetest
 
 EXPOSE 30000/udp
 
-CMD ["./bin/minetestserver", "--terminal"]
+CMD ["./bin/minetestserver", "--config", "./conf/minetest.conf", "--terminal"]
