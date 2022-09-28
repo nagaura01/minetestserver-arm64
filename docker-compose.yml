@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  minetestserver:
+    image: nagaura01/minetestserver-arm64:5.6.1
+    volumes:
+      - ./conf/:/minetest-5.6.1/conf/
+      - ./mods/:/minetest-5.6.1/mods/
+      - ./worlds/:/minetest-5.6.1/worlds/
+    ports:
+      - 30000:30000/udp
