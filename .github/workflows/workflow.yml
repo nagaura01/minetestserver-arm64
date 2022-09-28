@@ -24,4 +24,5 @@ jobs:
           docker buildx build \
           --platform linux/arm64 \
           --output "type=image,push=true" \
+          --tag nagaura01/minetestserver-arm64:5.6.1
           .
