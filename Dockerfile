@@ -19,7 +19,6 @@ RUN apk add --no-cache \
         luajit-dev \
         zstd-dev \
         ncurses-dev \
-        ibpq-dev
 
 RUN wget https://github.com/minetest/minetest/archive/5.6.1.tar.gz && \
         tar xf 5.6.1.tar.gz && \
@@ -39,8 +38,7 @@ RUN cmake -B build \
         -DBUILD_CLIENT=FALSE \
         -DBUILD_SERVER=TRUE \
         -DBUILD_UNITTESTS=FALSE \
-        -DENABLE_CURSES=ON \
-        -DENABLE_POSTGRESQL=ON && \
+        -DENABLE_CURSES=ON && \
     cmake --build build && \
     cmake --install build
 
@@ -52,13 +50,12 @@ RUN apk add --no-cache \
         gmp \
         libstdc++ \
         libgcc \
-        libpq \
         luajit \
         ncurses \
         jsoncpp \
         zstd-libs && \
     adduser -D minetest --uid 30000 -h /minetest-5.6.1 && \
-	chown -R minetest:minetest /minetest-5.6.1
+    chown -R minetest:minetest /minetest-5.6.1
 
 WORKDIR /minetest-5.6.1
 
