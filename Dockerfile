@@ -18,7 +18,8 @@ RUN apk add --no-cache \
         jsoncpp-dev \
         luajit-dev \
         zstd-dev \
-        ncurses-dev
+        ncurses-dev \
+        libpq-dev
 
 RUN wget https://github.com/minetest/minetest/archive/5.6.1.tar.gz && \
         tar xf 5.6.1.tar.gz && \
@@ -35,14 +36,14 @@ RUN wget https://github.com/minetest/minetest/archive/5.6.1.tar.gz && \
 
 WORKDIR /minetest-5.6.1
 
-RUN cmake -B build \
+RUN cmake . \
         -DRUN_IN_PLACE=TRUE \
         -DBUILD_CLIENT=FALSE \
         -DBUILD_SERVER=TRUE \
         -DBUILD_UNITTESTS=FALSE \
-        -DENABLE_CURSES=ON && \
-    cmake --build build && \
-    cmake --install build
+        -DENABLE_CURSES=ON \
+        -DENABLE_POSTGRESQL=ON && \
+    make -j$(nproc)
 
 FROM alpine:3.16.2 AS runtime
 
@@ -52,6 +53,7 @@ RUN apk add --no-cache \
         gmp \
         libstdc++ \
         libgcc \
+        libpq \
         luajit \
         ncurses \
         jsoncpp \
