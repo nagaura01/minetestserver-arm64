@@ -33,6 +33,8 @@ RUN wget https://github.com/minetest/minetest/archive/5.6.1.tar.gz && \
         mv irrlicht-master irrlichtmt && \
         cd ..
 
+WORKDIR /minetest-5.6.1
+
 RUN cmake -B build \
         -DRUN_IN_PLACE=TRUE \
         -DBUILD_CLIENT=FALSE \
