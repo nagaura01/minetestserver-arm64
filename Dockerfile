@@ -18,7 +18,7 @@ RUN apk add --no-cache \
         jsoncpp-dev \
         luajit-dev \
         zstd-dev \
-        ncurses-dev \
+        ncurses-dev
 
 RUN wget https://github.com/minetest/minetest/archive/5.6.1.tar.gz && \
         tar xf 5.6.1.tar.gz && \
@@ -58,6 +58,8 @@ RUN apk add --no-cache \
     chown -R minetest:minetest /minetest-5.6.1
 
 WORKDIR /minetest-5.6.1
+
+COPY --from=0 /minetest-5.6.1 ./
 
 USER minetest:minetest
 
