@@ -18,7 +18,6 @@ RUN apk add --no-cache \
         jsoncpp-dev \
         luajit-dev \
         zstd-dev \
-        ncurses-dev \
         libpq-dev
 
 RUN wget https://github.com/minetest/minetest/archive/5.6.1.tar.gz && \
@@ -41,7 +40,6 @@ RUN cmake . \
         -DBUILD_CLIENT=FALSE \
         -DBUILD_SERVER=TRUE \
         -DBUILD_UNITTESTS=FALSE \
-        -DENABLE_CURSES=ON \
         -DENABLE_POSTGRESQL=ON && \
     make -j$(nproc)
 
@@ -55,7 +53,6 @@ RUN apk add --no-cache \
         libgcc \
         libpq \
         luajit \
-        ncurses \
         jsoncpp \
         zstd-libs && \
     adduser -D minetest --uid 30000 -h /minetest-5.6.1 && \
@@ -69,4 +66,4 @@ USER minetest:minetest
 
 EXPOSE 30000/udp
 
-CMD ["./bin/minetestserver", "--config", "./conf/minetest.conf", "--terminal"]
+CMD ["./bin/minetestserver", "--config", "./conf/minetest.conf"]
